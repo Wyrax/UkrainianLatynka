@@ -23,166 +23,221 @@ function ukrToLat(text) {
     // text = text || '';
 
     return text
-             // ToDo: protect latin characters option with brackets [] and in latToCyr() exclude chars inside [] from transliteration
-             // visitors counter
-             // abbreviation logic must differ from allcaps logic :( Районний Відділ Юстиції = RVJ/RVJu != RVJU
-        // .replace(/іє/g, 'ie') // Exception
-        // .replace(/Іє/g, 'Ie') // Exception
-        // .replace(/ія/g, 'ia') // Exception
-        // .replace(/Ія/g, 'Ia') // Exception
-        // .replace(/зг/g, 'zgh') // Exception
-        // .replace(/Зг/g, 'Zgh') // Exception
-        // .replace(/ьо/g, 'io') // Exception
+            // ToDo: protect latin characters option with brackets [] and in latToCyr() exclude chars inside [] from transliteration
+            // visitors counter
+            // abbreviation logic must differ from allcaps logic :( Районний Відділ Юстиції = RVJ/RVJu != RVJU
 
         // .replace(/дж/g, 'Ǆǅǆ')
-
         // .replace(/template/g, 'template')
 
         .replace(/['’]я/g, 'ja')
         .replace(/['’]є/g, 'je')
         .replace(/['’]ї/g, 'ji')
         .replace(/['’]ю/g, 'ju')
-        // .replace(/’/g, '')
 
-        // .replace(/к['’]я/g, 'kja') //LAST LAST edit
+        // .replace(/к['’]я/g, 'kja')
         // .replace(/К['’]я/g, 'Kja')
-        .replace(/к([яєю])/g, 'ḱ$1')
-        .replace(/К([яєю])/g, 'Ḱ$1')
 
-        .replace(/б([яєю])/g, 'b́$1')
-        .replace(/Б([яєю])/g, 'B́$1')
-        .replace(/в([яєю])/g, 'v́$1')
-        .replace(/В([яєю])/g, 'V́$1')
-        .replace(/м([яєю])/g, 'ḿ$1')
-        .replace(/М([яєю])/g, 'Ḿ$1')
-        .replace(/п([яєю])/g, 'ṕ$1')
-        .replace(/П([яєю])/g, 'Ṕ$1')
-        .replace(/ф([яєю])/g, 'f́$1')
-        .replace(/Ф([яєю])/g, 'F́$1')
-        .replace(/х([яєю])/g, 'h́$1')
-        .replace(/Х([яєю])/g, 'H́$1')
-
+        .replace(/бя/g, 'b́a')
+        .replace(/бє/g, 'b́e')
+        .replace(/бю/g, 'b́u')
+        .replace(/Бя/g, 'B́a')
+        .replace(/Бє/g, 'B́e')
+        .replace(/Бю/g, 'B́u')
+        .replace(/вя/g, 'v́a')
+        .replace(/вє/g, 'v́e')
+        .replace(/вю/g, 'v́u')
+        .replace(/Вя/g, 'V́a')
+        .replace(/Вє/g, 'V́e')
+        .replace(/Вю/g, 'V́u')
+        .replace(/гя/g, 'ǵa')
+        .replace(/гє/g, 'ǵe')
+        .replace(/гю/g, 'ǵu')
+        .replace(/Гя/g, 'Ǵa')
+        .replace(/Гє/g, 'Ǵe')
+        .replace(/Гю/g, 'Ǵu')
+        .replace(/ґя/g, 'ğ́a')
+        .replace(/ґє/g, 'ğ́e')
+        .replace(/ґю/g, 'ğ́u')
+        .replace(/Ґя/g, 'Ğ́a')
+        .replace(/Ґє/g, 'Ğ́e')
+        .replace(/Ґю/g, 'Ğ́u')
+        .replace(/жя/g, 'ž́a')
+        .replace(/жє/g, 'ž́e')
+        .replace(/жю/g, 'ž́u')
+        .replace(/Жя/g, 'Ž́a')
+        .replace(/Жє/g, 'Ž́e')
+        .replace(/Жю/g, 'Ž́u')
+        .replace(/кя/g, 'ḱa')
+        .replace(/кє/g, 'ḱe')
+        .replace(/кю/g, 'ḱu')
+        .replace(/Кя/g, 'Ḱa')
+        .replace(/Кє/g, 'Ḱe')
+        .replace(/Кю/g, 'Ḱu')
+        .replace(/мя/g, 'ḿa')
+        .replace(/мє/g, 'ḿe')
+        .replace(/мю/g, 'ḿu')
+        .replace(/Мя/g, 'Ḿa')
+        .replace(/Мє/g, 'Ḿe')
+        .replace(/Мю/g, 'Ḿu')
+        .replace(/пя/g, 'ṕa')
+        .replace(/пє/g, 'ṕe')
+        .replace(/пю/g, 'ṕu')
+        .replace(/Пя/g, 'Ṕa')
+        .replace(/Пє/g, 'Ṕe')
+        .replace(/Пю/g, 'Ṕu')
+        .replace(/фя/g, 'f́a')
+        .replace(/фє/g, 'f́e')
+        .replace(/фю/g, 'f́u')
+        .replace(/Фя/g, 'F́a')
+        .replace(/Фє/g, 'F́e')
+        .replace(/Фю/g, 'F́u')
+        .replace(/хя/g, 'h́a')
+        .replace(/хє/g, 'h́e')
+        .replace(/хю/g, 'h́u')
+        .replace(/Хя/g, 'H́a')
+        .replace(/Хє/g, 'H́e')
+        .replace(/Хю/g, 'H́u')
+        .replace(/чя/g, 'č́a')
+        .replace(/чє/g, 'č́e')
+        .replace(/чю/g, 'č́u')
+        .replace(/Чя/g, 'Č́a')
+        .replace(/Чє/g, 'Č́e')
+        .replace(/Чю/g, 'Č́u')
+        .replace(/шя/g, 'š́a')
+        .replace(/шє/g, 'š́e')
+        .replace(/шю/g, 'š́u')
+        .replace(/Шя/g, 'Š́a')
+        .replace(/Шє/g, 'Š́e')
+        .replace(/Шю/g, 'Š́u')
+        // .replace(/я/g, 'a')
+        // .replace(/є/g, 'e')
+        // .replace(/ю/g, 'u')
+        // .replace(/я/g, 'a')
+        // .replace(/є/g, 'e')
+        // .replace(/ю/g, 'u')
+        // Đđ Ƶƶ
 
         .replace(/дя/g, 'ďa')
         .replace(/дє/g, 'ďe')
-        .replace(/дї/g, 'ďi') // n/e
+        // .replace(/дї/g, 'ďi') // n/e
         .replace(/дю/g, 'ďu')
         .replace(/дь/g, 'ď')
         .replace(/зя/g, 'źa')
         .replace(/зє/g, 'źe')
-        .replace(/зї/g, 'źi') // n/e
+        // .replace(/зї/g, 'źi') // n/e
         .replace(/зю/g, 'źu')
         .replace(/зь/g, 'ź')
         .replace(/ля/g, 'ľa')
         .replace(/лє/g, 'ľe')
-        .replace(/лї/g, 'ľi') // n/e
+        // .replace(/лї/g, 'ľi') // n/e
         .replace(/лю/g, 'ľu')
         .replace(/ль/g, 'ľ')
         .replace(/ня/g, 'ńa')
         .replace(/нє/g, 'ńe')
-        .replace(/нї/g, 'ńi') // n/e
+        // .replace(/нї/g, 'ńi') // n/e
         .replace(/ню/g, 'ńu')
         .replace(/нь/g, 'ń')
         .replace(/ря/g, 'ŕa')
         .replace(/рє/g, 'ŕe')
-        .replace(/рї/g, 'ŕi') // n/e
+        // .replace(/рї/g, 'ŕi') // n/e
         .replace(/рю/g, 'ŕu')
         .replace(/рь/g, 'ŕ')
         .replace(/ся/g, 'śa')
         .replace(/сє/g, 'śe')
-        .replace(/сї/g, 'śi') // n/e
+        // .replace(/сї/g, 'śi') // n/e
         .replace(/сю/g, 'śu')
         .replace(/сь/g, 'ś')
         .replace(/тя/g, 'ťa')
         .replace(/тє/g, 'ťe')
-        .replace(/тї/g, 'ťi') // n/e
+        // .replace(/тї/g, 'ťi') // n/e
         .replace(/тю/g, 'ťu')
         .replace(/ть/g, 'ť')
         .replace(/ця/g, 'ća')
         .replace(/цє/g, 'će')
-        .replace(/цї/g, 'ći') // n/e
+        // .replace(/цї/g, 'ći') // n/e
         .replace(/цю/g, 'ću')
         .replace(/ць/g, 'ć')
 
         .replace(/Дя/g, 'Ďa')
         .replace(/Дє/g, 'Ďe')
-        .replace(/Дї/g, 'Ďi') // n/e
+        // .replace(/Дї/g, 'Ďi') // n/e
         .replace(/Дю/g, 'Ďu')
         .replace(/Дь/g, 'Ď')
         .replace(/Зя/g, 'Źa')
         .replace(/Зє/g, 'Źe')
-        .replace(/Зї/g, 'Źi') // n/e
+        // .replace(/Зї/g, 'Źi') // n/e
         .replace(/Зю/g, 'Źu')
         .replace(/Зь/g, 'Ź')
         .replace(/Ля/g, 'Ľa')
         .replace(/Лє/g, 'Ľe')
-        .replace(/Лї/g, 'Ľi') // n/e
+        // .replace(/Лї/g, 'Ľi') // n/e
         .replace(/Лю/g, 'Ľu')
         .replace(/Ль/g, 'Ľ')
         .replace(/Ня/g, 'Ńa')
         .replace(/Нє/g, 'Ńe')
-        .replace(/Нї/g, 'Ńi') // n/e
+        // .replace(/Нї/g, 'Ńi') // n/e
         .replace(/Ню/g, 'Ńu')
         .replace(/Нь/g, 'Ń')
         .replace(/Ря/g, 'Ŕa')
         .replace(/Рє/g, 'Ŕe')
-        .replace(/Рї/g, 'Ŕi') // n/e
+        // .replace(/Рї/g, 'Ŕi') // n/e
         .replace(/Рю/g, 'Ŕu')
         .replace(/Рь/g, 'Ŕ')
         .replace(/Ся/g, 'Śa')
         .replace(/Сє/g, 'Śe')
-        .replace(/Сї/g, 'Śi') // n/e
+        // .replace(/Сї/g, 'Śi') // n/e
         .replace(/Сю/g, 'Śu')
         .replace(/Сь/g, 'Ś')
         .replace(/Тя/g, 'Ťa')
         .replace(/Тє/g, 'Ťe')
-        .replace(/Тї/g, 'Ťi') // n/e
+        // .replace(/Тї/g, 'Ťi') // n/e
         .replace(/Тю/g, 'Ťu')
         .replace(/Ть/g, 'Ť')
         .replace(/Ця/g, 'Ća')
         .replace(/Цє/g, 'Će')
-        .replace(/Цї/g, 'Ći') // n/e
+        // .replace(/Цї/g, 'Ći') // n/e
         .replace(/Цю/g, 'Ću')
         .replace(/Ць/g, 'Ć')
 
         .replace(/ДЯ/g, 'ĎA')
         .replace(/ДЄ/g, 'ĎE')
-        .replace(/ДЇ/g, 'ĎI') // n/e
+        // .replace(/ДЇ/g, 'ĎI') // n/e
         .replace(/ДЮ/g, 'ĎU')
         .replace(/ДЬ/g, 'Ď')
         .replace(/ЗЯ/g, 'ŹA')
         .replace(/ЗЄ/g, 'ŹE')
-        .replace(/ЗЇ/g, 'ŹI') // n/e
+        // .replace(/ЗЇ/g, 'ŹI') // n/e
         .replace(/ЗЮ/g, 'ŹU')
         .replace(/ЗЬ/g, 'Ź')
         .replace(/ЛЯ/g, 'ĽA')
         .replace(/ЛЄ/g, 'ĽE')
-        .replace(/ЛЇ/g, 'ĽI') // n/e
+        // .replace(/ЛЇ/g, 'ĽI') // n/e
         .replace(/ЛЮ/g, 'ĽU')
         .replace(/ЛЬ/g, 'Ľ')
         .replace(/НЯ/g, 'ŃA')
         .replace(/НЄ/g, 'ŃE')
-        .replace(/НЇ/g, 'ŃI') // n/e
+        // .replace(/НЇ/g, 'ŃI') // n/e
         .replace(/НЮ/g, 'ŃU')
         .replace(/НЬ/g, 'Ń')
         .replace(/РЯ/g, 'ŔA')
         .replace(/РЄ/g, 'ŔE')
-        .replace(/РЇ/g, 'ŔI') // n/e
+        // .replace(/РЇ/g, 'ŔI') // n/e
         .replace(/РЮ/g, 'ŔU')
         .replace(/РЬ/g, 'Ŕ')
         .replace(/СЯ/g, 'ŚA')
         .replace(/СЄ/g, 'ŚE')
-        .replace(/СЇ/g, 'ŚI') // n/e
+        // .replace(/СЇ/g, 'ŚI') // n/e
         .replace(/СЮ/g, 'ŚU')
         .replace(/СЬ/g, 'Ś')
         .replace(/ТЯ/g, 'ŤA')
         .replace(/ТЄ/g, 'ŤE')
-        .replace(/ТЇ/g, 'ŤI') // n/e
+        // .replace(/ТЇ/g, 'ŤI') // n/e
         .replace(/ТЮ/g, 'ŤU')
         .replace(/ТЬ/g, 'Ť')
         .replace(/ЦЯ/g, 'ĆA')
         .replace(/ЦЄ/g, 'ĆE')
-        .replace(/ЦЇ/g, 'ĆI') // n/e
+        // .replace(/ЦЇ/g, 'ĆI') // n/e
         .replace(/ЦЮ/g, 'ĆU')
         .replace(/ЦЬ/g, 'Ć')
 
@@ -224,7 +279,7 @@ function ukrToLat(text) {
         .replace(/ч/g, 'č')
         .replace(/ш/g, 'š')
         .replace(/щ/g, 'šč')
-        .replace(/ь/g, 'ĵ◄')
+        .replace(/ь/g, 'ĵ◄') // 'watcher wrong' replace
         // .replace(/(^|\s)ю/g, '$1yu')
         .replace(/ю/g, 'ju')
         // .replace(/(^|\s)я/g, '$1ya')
@@ -306,7 +361,7 @@ function latToUkr(text) {
     return text
         // .replace(/a/g, 'a◄')
 
-        .replace(/Lukjan/g, 'Лук’ян')
+        .replace(/Lukjan/g, 'Лук’ян') //NEED?
         // .replace(/dvja/g, 'двя')
         // .replace(/svja/g, 'свя')
         // .replace(/Svja/g, 'Свя')
@@ -317,24 +372,87 @@ function latToUkr(text) {
         .replace(/Dytjasl/g, 'Дит’ясл')
         .replace(/onju/g, 'он’ю')
 
-        // .replace(/kja/g, 'к’я') // LAST EDIT (+added Kk into line 338)
+        // .replace(/kja/g, 'к’я')
         // .replace(/Kj([aeu])/g, 'К’я')
-        .replace(/ḱ([aeu])/g, 'к$1')
-        .replace(/Ḱ([aeu])/g, 'К$1')
 
-        .replace(/b́([aeu])/g, 'б$1')
-        .replace(/B́([aeu])/g, 'Б$1')
-        .replace(/v́([aeu])/g, 'в$1')
-        .replace(/V́([aeu])/g, 'В$1')
-        .replace(/ḿ([aeu])/g, 'м$1')
-        .replace(/Ḿ([aeu])/g, 'М$1')
-        .replace(/ṕ([aeu])/g, 'п$1')
-        .replace(/Ṕ([aeu])/g, 'П$1')
-        .replace(/f́([aeu])/g, 'ф$1')
-        .replace(/F́([aeu])/g, 'Ф$1')
-        .replace(/h́([aeu])/g, 'х$1')
-        .replace(/H́([aeu])/g, 'Х$1')
-        //Done: ADD demisoft Hh and Ff here and in the ukrToLat()
+        .replace(/b́a/g, 'бя')
+        .replace(/b́e/g, 'бє')
+        .replace(/b́u/g, 'бю')
+        .replace(/B́a/g, 'Бя')
+        .replace(/B́e/g, 'Бє')
+        .replace(/B́u/g, 'Бю')
+        .replace(/v́a/g, 'вя')
+        .replace(/v́e/g, 'вє')
+        .replace(/v́u/g, 'вю')
+        .replace(/V́a/g, 'Вя')
+        .replace(/V́e/g, 'Вє')
+        .replace(/V́u/g, 'Вю')
+        .replace(/ǵa/g, 'гя')
+        .replace(/ǵe/g, 'гє')
+        .replace(/ǵu/g, 'гю')
+        .replace(/Ǵa/g, 'Гя')
+        .replace(/Ǵe/g, 'Гє')
+        .replace(/Ǵu/g, 'Гю')
+        .replace(/ğ́a/g, 'ґя')
+        .replace(/ğ́e/g, 'ґє')
+        .replace(/ğ́u/g, 'ґю')
+        .replace(/Ğ́a/g, 'Ґя')
+        .replace(/Ğ́e/g, 'Ґє')
+        .replace(/Ğ́u/g, 'Ґю')
+        .replace(/ž́a/g, 'жя')
+        .replace(/ž́e/g, 'жє')
+        .replace(/ž́u/g, 'жю')
+        .replace(/Ž́a/g, 'Жя')
+        .replace(/Ž́e/g, 'Жє')
+        .replace(/Ž́u/g, 'Жю')
+        .replace(/ḱa/g, 'кя')
+        .replace(/ḱe/g, 'кє')
+        .replace(/ḱu/g, 'кю')
+        .replace(/Ḱa/g, 'Кя')
+        .replace(/Ḱe/g, 'Кє')
+        .replace(/Ḱu/g, 'Кю')
+        .replace(/ḿa/g, 'мя')
+        .replace(/ḿe/g, 'мє')
+        .replace(/ḿu/g, 'мю')
+        .replace(/Ḿa/g, 'Мя')
+        .replace(/Ḿe/g, 'Мє')
+        .replace(/Ḿu/g, 'Мю')
+        .replace(/ṕa/g, 'пя')
+        .replace(/ṕe/g, 'пє')
+        .replace(/ṕu/g, 'пю')
+        .replace(/Ṕa/g, 'Пя')
+        .replace(/Ṕe/g, 'Пє')
+        .replace(/Ṕu/g, 'Пю')
+        .replace(/f́a/g, 'фя')
+        .replace(/f́e/g, 'фє')
+        .replace(/f́u/g, 'фю')
+        .replace(/F́a/g, 'Фя')
+        .replace(/F́e/g, 'Фє')
+        .replace(/F́u/g, 'Фю')
+        .replace(/h́a/g, 'хя')
+        .replace(/h́e/g, 'хє')
+        .replace(/h́u/g, 'хю')
+        .replace(/H́a/g, 'Хя')
+        .replace(/H́e/g, 'Хє')
+        .replace(/H́u/g, 'Хю')
+        .replace(/č́a/g, 'чя')
+        .replace(/č́e/g, 'чє')
+        .replace(/č́u/g, 'чю')
+        .replace(/Č́a/g, 'Чя')
+        .replace(/Č́e/g, 'Чє')
+        .replace(/Č́u/g, 'Чю')
+        .replace(/š́a/g, 'шя')
+        .replace(/š́e/g, 'шє')
+        .replace(/š́u/g, 'шю')
+        .replace(/Š́a/g, 'Шя')
+        .replace(/Š́e/g, 'Шє')
+        .replace(/Š́u/g, 'Шю')
+        // .replace(/a/g, 'я')
+        // .replace(/e/g, 'є')
+        // .replace(/u/g, 'ю')
+        // .replace(/a/g, 'я')
+        // .replace(/e/g, 'є')
+        // .replace(/u/g, 'ю')
 
         .replace(/([bpvmfžčšgkhğdtzcslnr])jevrop/g, '$1’європ')  //Тверді: б, п, в, м, ф, ж, ч, ш, дж, г, к, х, ґ, д, т, з, ц, дз, с, л, н, р.
                                                 //                       ž č
@@ -344,7 +462,8 @@ function latToUkr(text) {
         // .replace(/['’]ї/g, 'ji')
         // .replace(/['’]ю/g, 'ju')
 
-        .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠš])j([aeiu])/g, '$1’j$2')
+        .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠš])j([aeiu])/g, '$1’j$2') // Proper apostrophe
+        // .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠšGgĞğ])j([aeiu])/g, '$1\'j$2') // Common (wrong) apostrophe 
 
         .replace(/ďa/g, 'дя')
         .replace(/ďe/g, 'дє')
