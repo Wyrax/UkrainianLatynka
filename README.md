@@ -48,6 +48,4 @@ Ukrainian cyrillic to latin transliterator
 |        | [дж]   | [d͡ʒ]       | Đđ       |
 |        | [дз]   | [d͡z]       | Ƶƶ       |
 |        | [дз']  | [d͡zʲ]      |          |
-|        | [/]    | []        |        |
-|        | [/]    | []        |        |
 

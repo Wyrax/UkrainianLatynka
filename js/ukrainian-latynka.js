@@ -30,10 +30,21 @@ function ukrToLat(text) {
         // .replace(/дж/g, 'Ǆǅǆ')
         // .replace(/template/g, 'template')
 
+
+        // .replace(/(([a-zA-Z]+\-?'?\s?){1,})/g, '{{$1}}') // Вікіпедія є цілковито сучасною (up-to date upto date), що означає {{$1}}
+
+        .replace(/(([a-zA-Z]+\-?'?(\s[a-zA-Z])?){1,})(\s+)?/g, '{{$1}}$4') // Protection of basic 26 latin characters
+
+        // .replace(new RegExp(oldWord, "g"), "") // PATTERN with variables
+
         .replace(/['’]я/g, 'ja')
         .replace(/['’]є/g, 'je')
         .replace(/['’]ї/g, 'ji')
         .replace(/['’]ю/g, 'ju')
+        .replace(/['’]Я/g, 'JA')
+        .replace(/['’]Є/g, 'JE')
+        .replace(/['’]Ї/g, 'JI')
+        .replace(/['’]Ю/g, 'JU')
 
         // .replace(/к['’]я/g, 'kja')
         // .replace(/К['’]я/g, 'Kja')
@@ -357,20 +368,24 @@ function ukrToLat(text) {
 
 function latToUkr(text) {
     // text = text || '';
+    let apostrophe = '\''; // Common (wrong) apostrophe
+    // let apostrophe = '’'; // Proper apostrophe
+    let brackets = '(?![^\{]*\})';
 
     return text
-        // .replace(/a/g, 'a◄')
 
-        .replace(/Lukjan/g, 'Лук’ян') //NEED?
+        // (?![^\[\]]*\]) // 'not in a squre brackets' example
+
+        // .replace(/Lukjan/g, 'Лук’ян')
         // .replace(/dvja/g, 'двя')
         // .replace(/svja/g, 'свя')
         // .replace(/Svja/g, 'Свя')
         // .replace(/rkvja/g, 'рквя')
         // .replace(/vpjač/g, 'впяч')
         // .replace(/cvja/g, 'цвя')
-        .replace(/dytjasl/g, 'дит’ясл')
-        .replace(/Dytjasl/g, 'Дит’ясл')
-        .replace(/onju/g, 'он’ю')
+        // .replace(/dytjasl/g, 'дит’ясл')
+        // .replace(/Dytjasl/g, 'Дит’ясл')
+        // .replace(/onju/g, 'он’ю')
 
         // .replace(/kja/g, 'к’я')
         // .replace(/Kj([aeu])/g, 'К’я')
@@ -454,16 +469,16 @@ function latToUkr(text) {
         // .replace(/e/g, 'є')
         // .replace(/u/g, 'ю')
 
-        .replace(/([bpvmfžčšgkhğdtzcslnr])jevrop/g, '$1’європ')  //Тверді: б, п, в, м, ф, ж, ч, ш, дж, г, к, х, ґ, д, т, з, ц, дз, с, л, н, р.
-                                                //                       ž č
+        .replace(/([bpvmfžčšgkhğdtzcslnr])jevrop/g, '$1'+apostrophe+'європ')  //Тверді: б, п, в, м, ф, ж, ч, ш, дж, г, к, х, ґ, д, т, з, ц, дз, с, л, н, р.
+                                                //                                        ž č
 
         // .replace(/['’]я/g, 'ja')
         // .replace(/['’]є/g, 'je')
         // .replace(/['’]ї/g, 'ji')
         // .replace(/['’]ю/g, 'ju')
 
-        .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠš])j([aeiu])/g, '$1’j$2') // Proper apostrophe
-        // .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠšGgĞğ])j([aeiu])/g, '$1\'j$2') // Common (wrong) apostrophe 
+        .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠšTtGgĞğ])j([aeiu])/g, '$1'+apostrophe+'j$2')
+        .replace(/([BbPpVvMmFfRrZzDdNnKkŽžHhŠšTtGgĞğ])J([AEIU])/g, '$1'+apostrophe+'J$2')
 
         .replace(/ďa/g, 'дя')
         .replace(/ďe/g, 'дє')
@@ -624,8 +639,6 @@ function latToUkr(text) {
         .replace(/Ť/g, 'Ть')
         .replace(/Ć/g, 'Ць')
 
-
-
         .replace(/Ja/g, 'Я')
         .replace(/Je/g, 'Є')
         .replace(/Ji/g, 'Ї')
@@ -642,66 +655,115 @@ function latToUkr(text) {
         .replace(/ju/g, 'ю')
         .replace(/ja/g, 'я')
 
-        .replace(/a/g, 'а')
-        .replace(/b/g, 'б')
-        .replace(/v/g, 'в')
-        .replace(/g/g, 'г')
+        // .replace(/a/g, 'а')
+        .replace(new RegExp('a' + brackets, "g"), "а")
+        // .replace(/b/g, 'б')
+        .replace(new RegExp('b' + brackets, "g"), "б")
+        // .replace(/v/g, 'в')
+        .replace(new RegExp('v' + brackets, "g"), "в")
+        // .replace(/g/g, 'г')
+        .replace(new RegExp('g' + brackets, "g"), "г")
         .replace(/ğ/g, 'ґ')
-        .replace(/d/g, 'д')
-        .replace(/e/g, 'е')
+        // .replace(/d/g, 'д')
+        .replace(new RegExp('d' + brackets, "g"), "д")
+        // .replace(/e/g, 'е')
+        .replace(new RegExp('e' + brackets, "g"), "е")
         .replace(/ž/g, 'ж')
-        .replace(/z/g, 'з')
+        // .replace(/z/g, 'з')
+        .replace(new RegExp('z' + brackets, "g"), "з")
         .replace(/ý/g, 'ий')
-        .replace(/y/g, 'и')
-        .replace(/i/g, 'і')
-        .replace(/j/g, 'й')
-        .replace(/k/g, 'к')
-        .replace(/l/g, 'л')
-        .replace(/m/g, 'м')
-        .replace(/n/g, 'н')
-        .replace(/o/g, 'о')
-        .replace(/p/g, 'п')
-        .replace(/r/g, 'р')
-        .replace(/s/g, 'с')
-        .replace(/t/g, 'т')
-        .replace(/u/g, 'у')
-        .replace(/f/g, 'ф')
-        .replace(/h/g, 'х')
-        .replace(/c/g, 'ц')
+        // .replace(/y/g, 'и')
+        .replace(new RegExp('y' + brackets, "g"), "и")
+        // .replace(/i/g, 'і')
+        .replace(new RegExp('i' + brackets, "g"), "і")
+        // .replace(/j/g, 'й')
+        .replace(new RegExp('j' + brackets, "g"), "й")
+        // .replace(/k/g, 'к')
+        .replace(new RegExp('k' + brackets, "g"), "к")
+        // .replace(/l/g, 'л')
+        .replace(new RegExp('l' + brackets, "g"), "л")
+        // .replace(/m/g, 'м')
+        .replace(new RegExp('m' + brackets, "g"), "м")
+        // .replace(/n/g, 'н')
+        .replace(new RegExp('n' + brackets, "g"), "н")
+        // .replace(/o/g, 'о')
+        .replace(new RegExp('o' + brackets, "g"), "о")
+        // .replace(/p/g, 'п')
+        .replace(new RegExp('p' + brackets, "g"), "п")
+        // .replace(/r/g, 'р')
+        .replace(new RegExp('r' + brackets, "g"), "р")
+        // .replace(/s/g, 'с')
+        .replace(new RegExp('s' + brackets, "g"), "с")
+        // .replace(/t/g, 'т')
+        .replace(new RegExp('t' + brackets, "g"), "т")
+        // .replace(/u/g, 'у') // protection test below
+        // .replace(/u(?![^\{]*\})/g, 'у')
+        .replace(new RegExp('u' + brackets, "g"), "у")
+        // .replace(/f/g, 'ф')
+        .replace(new RegExp('f' + brackets, "g"), "ф")
+        // .replace(/h/g, 'х')
+        .replace(new RegExp('h' + brackets, "g"), "х")
+        // .replace(/c/g, 'ц')
+        .replace(new RegExp('c' + brackets, "g"), "ц")
         .replace(/č/g, 'ч')
-        .replace(/š/g, 'ш') // АЛАРМ
+        .replace(/š/g, 'ш') // АЛАРМ ?? why
         // .replace(/Ĵ◄/g, 'ь')
 
-        .replace(/A/g, 'А')
-        .replace(/B/g, 'Б')
-        .replace(/V/g, 'В')
-        .replace(/G/g, 'Г')
+        // .replace(/A/g, 'А')
+        .replace(new RegExp('A' + brackets, "g"), "А")
+        // .replace(/B/g, 'Б')
+        .replace(new RegExp('B' + brackets, "g"), "Б")
+        // .replace(/V/g, 'В')
+        .replace(new RegExp('V' + brackets, "g"), "В")
+        // .replace(/G/g, 'Г')
+        .replace(new RegExp('G' + brackets, "g"), "Г")
         .replace(/Ğ/g, 'Ґ')
-        .replace(/D/g, 'Д')
-        .replace(/E/g, 'Е')
+        // .replace(/D/g, 'Д')
+        .replace(new RegExp('D' + brackets, "g"), "Д")
+        // .replace(/E/g, 'Е')
+        .replace(new RegExp('E' + brackets, "g"), "Е")
         .replace(/Ž/g, 'Ж')
-        .replace(/Z/g, 'З')
+        // .replace(/Z/g, 'З')
+        .replace(new RegExp('Z' + brackets, "g"), "З")
         .replace(/Ý/g, 'Ий') // тест аббрев капс етс.
-        .replace(/Y/g, 'И')
-        .replace(/I/g, 'І')
-        .replace(/J/g, 'Й')
-        .replace(/K/g, 'К')
-        .replace(/L/g, 'Л')
-        .replace(/M/g, 'М')
-        .replace(/N/g, 'Н')
-        .replace(/O/g, 'О')
-        .replace(/P/g, 'П')
-        .replace(/R/g, 'Р')
-        .replace(/S/g, 'С')
-        .replace(/T/g, 'Т')
-        .replace(/U/g, 'У')
-        .replace(/F/g, 'Ф')
-        .replace(/H/g, 'Х')
-        .replace(/C/g, 'Ц')
+        // .replace(/Y/g, 'И')
+        .replace(new RegExp('Y' + brackets, "g"), "И")
+        // .replace(/I/g, 'І')
+        .replace(new RegExp('I' + brackets, "g"), "І")
+        // .replace(/J/g, 'Й')
+        .replace(new RegExp('J' + brackets, "g"), "Й")
+        // .replace(/K/g, 'К')
+        .replace(new RegExp('K' + brackets, "g"), "К")
+        // .replace(/L/g, 'Л')
+        .replace(new RegExp('L' + brackets, "g"), "Л")
+        // .replace(/M/g, 'М')
+        .replace(new RegExp('M' + brackets, "g"), "М")
+        // .replace(/N/g, 'Н')
+        .replace(new RegExp('N' + brackets, "g"), "Н")
+        // .replace(/O/g, 'О')
+        .replace(new RegExp('O' + brackets, "g"), "О")
+        // .replace(/P/g, 'П')
+        .replace(new RegExp('P' + brackets, "g"), "П")
+        // .replace(/R/g, 'Р')
+        .replace(new RegExp('R' + brackets, "g"), "Р")
+        // .replace(/S/g, 'С')
+        .replace(new RegExp('S' + brackets, "g"), "С")
+        // .replace(/T/g, 'Т')
+        .replace(new RegExp('T' + brackets, "g"), "Т")
+        // .replace(/U/g, 'У')
+        .replace(new RegExp('U' + brackets, "g"), "У")
+        // .replace(/F/g, 'Ф')
+        .replace(new RegExp('F' + brackets, "g"), "Ф")
+        // .replace(/H/g, 'Х')
+        .replace(new RegExp('H' + brackets, "g"), "Х")
+        // .replace(/C/g, 'Ц')
+        .replace(new RegExp('C' + brackets, "g"), "Ц")
         .replace(/Č/g, 'Ч')
         .replace(/Š/g, 'Ш')
         .replace(/ĴĴ◄/g, 'Ь')
         
+        .replace(/\{\{/g, '')
+        .replace(/\}\}/g, '')
         .replace(/\u0301/g, ''); //U+0301 combining acute
         // .replace(/'/g, '')
         // .replace(/’/g, '');
