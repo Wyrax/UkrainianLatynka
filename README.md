@@ -18,6 +18,7 @@ Ukrainian cyrillic to latin transliterator
 | Зз     | [з]    | [z]        | Zz       |
 |        | [з']   | [zʲ]       | Źź       |
 | Ии     | [и]    | [ɪ]        | Yy       |
+|        | [ий]   | [ɪj]       | Ýý       |
 | Іі     | [і]    | [i]        | Ii       |
 | Її     | [йі]   | [ji]       |          |
 | Кк     | [к]    | [k]        | Kk       |
