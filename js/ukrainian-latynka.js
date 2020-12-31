@@ -30,8 +30,16 @@ function ukrToLat(text) {
         // visitors counter
         // abbreviation logic must differ from allcaps logic :( Районний Відділ Юстиції = RVJ/RVJu != RVJU
 
-        .replace(/([\-?'=\/\\\|<>]*([0-9]?[a-zA-Z]+[\-?&'":\.=\/\\\|<>]*(\s[0-9]?[a-zA-Z])?){1,})(\s+)?/g, '{{$1}}$4') // Protection of basic 26 latin characters
+        // .replace(/([\-?'=\/\\\|<>]*([0-9]?[a-zA-Z]+[\-?&'":\.=\/\\\|<>]*(\s[0-9]?[a-zA-Z])?){1,})(\s+)?/g, '{{$1}}$4') // with digits? Protection of basic 26 latin characters
+        .replace(/([\-?'=\/\\\|<>]*([a-zA-Z]+[\-?&'":\.=\/\\\|<>]*(\s[a-zA-Z])?){1,})(\s+)?/g, '{{$1}}$4') // Protection of basic 26 latin characters
+        // .replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g, '{{$1}}') // match URL
+
 //TODO match digits only inside a-z&/.etc
+
+// ([a-z].)(\d+)(.[a-z])
+
+// [\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))* // digits between
+// ([\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))*) // digits between in the capturing group
 
         // .replace(new RegExp(oldWord, 'g'), '"' // PATTERN with variables
 
