@@ -12,6 +12,9 @@ let apostrophe = '\''; // Common (wrong) apostrophe
 // let apostrophe = '’'; // Proper apostrophe
 // let brackets = '(?![^\{]*\})';
 
+let commonApostropheCount;
+let properApostropheCount;
+
 let leftProtectionSymbol = '`';
 // let leftProtectionSymbol = '\u200d';
 let rightProtectionSymbol = '´';
@@ -32,11 +35,16 @@ secondButton.addEventListener('click', () => {
     thirdTextArea.value = latToUkr(text);
     // unprotectURLs(text);
     if (firstTextArea.value === thirdTextArea.value) {
-        document.getElementById('compare_info').textContent = 'The two texts are identical!';
+        document.getElementById('compare_info').textContent = 'These two texts are identical!';
         document.getElementById('compare_info').style.color = 'green';
     } else {
-        document.getElementById('compare_info').textContent = 'The two texts are different';
-        document.getElementById('compare_info').style.color = 'red';
+        if (commonApostropheCount > 0 && properApostropheCount > 0) {
+            document.getElementById('compare_info').textContent = 'These two texts are different. Different apostrophe symbols in the source text detected.';
+            document.getElementById('compare_info').style.color = 'red';
+        } else {
+            document.getElementById('compare_info').textContent = 'These two texts are different';
+            document.getElementById('compare_info').style.color = 'red';
+        }
     }
 });
 
@@ -66,12 +74,12 @@ function ukrToLat(text) {
         console.log('apostrophe variable type: ' + typeof apostrophe);
     }
 
-    let matchIndex = -1;
+    // let matchIndex = -1;
     let protectIndex = -1;
     protectedURLsArray = [];
     text = text.replace(/(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g, function(match) {
         protectedURLsArray.push(match);
-        matchIndex++;
+        // matchIndex++;
         // return '{{'+'зУРЛ'+'-'+matchIndex+'}}';
         return 'ProtectedURLArrayItem';
     });
@@ -374,6 +382,13 @@ function ukrToLat(text) {
         .replace(/Иє/g, 'Ýe')
         .replace(/Иї/g, 'Ýi')
         .replace(/Ию/g, 'Ýu')
+
+        .replace(/ИЙ/g, 'Ý')
+        .replace(/ИЯ/g, 'ÝA')
+        .replace(/ИЄ/g, 'ÝE')
+        .replace(/ИЇ/g, 'ÝI')
+        .replace(/ИЮ/g, 'ÝU')
+
         .replace(/И/g, 'Y')
         .replace(/І/g, 'I')
         .replace(/Ї([A-ZĞŽÝĽŃŔŚŤĆČŠА-ЯҐЄІЇ\"»,:;)\?!\-\.\s\r])/g, 'JI$1')
@@ -526,6 +541,11 @@ function latToUkr(text) {
         .replace(/Š́E/g, 'ШЄ')
         .replace(/Š́U/g, 'ШЮ')
 
+        // .replace(/(^|[\s-\('"«»:\\\/])NA(JA|JE|JI|JU)((BED)|(VN[YÝIO])|(VU)|(DK?[\sAYIOU])|(KIR)|(LO[ŽZ])|(RMAR)|(ME?Ć)|(MN[AYIOU])|(BSTV)|(B[\sAYIU])|(DA[NT])|(DEN)|(DŽ)|(ŽAČ)|(ŽDŽ)|(ŽEN)|(ŽYT)|(ŽUV)|(Z[DN])|(N[\sAYIOU])|(ST)|(TYV)|(HAT))/g, '$1НА$2$3')
+        .replace(/na(ja|je|ji|ju)((([mh]\s)|([jm])|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'на$1$2')
+        .replace(/Na(ja|je|ji|ju)((([mh]\s)|([jm])|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'На$1$2')
+        .replace(/NA(JA|JE|JI|JU)((([MH]\s)|([JM])|([\s]))|(BED)|(VN[AYÝIOU])|(VU)|(DK?[\sAYIOU])|(KIR)|(LO[ŽZ])|(RMAR)|(ME?Ć)|(MN[AYIOU])|(BSTV)|(B[\sAYIOU])|([VL])|(DA[NT])|(DEN)|(DŽ)|(ŽAČ)|(ŽDŽ)|(ŽEN)|(ŽYT)|(ŽUV)|(Z[DN])|(N[\sAYIOU])|(ST)|(TYV)|(HAT))/g, 'НА$1$2')
+
         .replace(/(^|[\s-\('"«»:\\\/])naj([aeiu])/g, '$1най$2')
         .replace(/(^|[\s-\('"«»:\\\/])Naj([aeiu])/g, '$1Най$2')
         .replace(/(^|[\s-\('"«»:\\\/])NAJ([AEIU])/g, '$1НАЙ$2')
@@ -647,6 +667,8 @@ function latToUkr(text) {
         .replace(/Ś([A-ZĞŽÝĽŃŔŚŤĆČŠА-ЯҐЄІЇ\"»,:;)\?!\-\.\s\r])/g, 'СЬ$1')
         .replace(/Ť([A-ZĞŽÝĽŃŔŚŤĆČŠА-ЯҐЄІЇ\"»,:;)\?!\-\.\s\r])/g, 'ТЬ$1')
         .replace(/Ć([A-ZĞŽÝĽŃŔŚŤĆČŠА-ЯҐЄІЇ\"»,:;)\?!\-\.\s\r])/g, 'ЦЬ$1')
+
+        .replace(/Ý([A-ZĞŽÝĽŃŔŚŤĆČŠА-ЯҐЄІЇ\"»,:;)\?!\-\.\s\r])/g, 'ИЙ$1') // test
         
         .replace(/Ď/g, 'Дь')
         .replace(/Ź/g, 'Зь')
