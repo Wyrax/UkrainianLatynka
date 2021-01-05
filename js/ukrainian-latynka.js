@@ -15,10 +15,10 @@ let apostrophe = '\''; // Common (wrong) apostrophe
 let commonApostropheCount;
 let properApostropheCount;
 
-let leftProtectionSymbol = '`';
-// let leftProtectionSymbol = '\u200d';
-let rightProtectionSymbol = '´';
-// let rightProtectionSymbol = '\u200c';
+// let leftProtectionSymbol = '`';
+let leftProtectionSymbol = '\u200d';
+// let rightProtectionSymbol = '´';
+let rightProtectionSymbol = '\u200c';
 
 // let brackets = '(?![^`]*´)'; // Acute accent typed as alt+0180
 let brackets = '(?![^'+leftProtectionSymbol+']*'+rightProtectionSymbol+')'; // Acute accent typed as alt+0180
@@ -26,14 +26,11 @@ let protectedURLsArray = [];
 
 firstButton.addEventListener('click', () => {
     let text = firstTextArea.value;
-    // protectURLs(text);
     secondTextArea.value = ukrToLat(text);
 });
 secondButton.addEventListener('click', () => {
     let text = secondTextArea.value;
-    // protectURLs(text);
     thirdTextArea.value = latToUkr(text);
-    // unprotectURLs(text);
     if (firstTextArea.value === thirdTextArea.value) {
         document.getElementById('compare_info').textContent = 'These two texts are identical!';
         document.getElementById('compare_info').style.color = 'green';
@@ -79,31 +76,23 @@ function ukrToLat(text) {
     protectedURLsArray = [];
     text = text.replace(/(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g, function(match) {
         protectedURLsArray.push(match);
-        // matchIndex++;
-        // return '{{'+'зУРЛ'+'-'+matchIndex+'}}';
         return 'ProtectedURLArrayItem';
     });
     console.log(protectedURLsArray);
 
     // return text
     text = text
-        // ToDo: protect latin characters option with brackets [] and in latToCyr() exclude chars inside [] from transliteration
+        // ToDo:
         // visitors counter
         // abbreviation logic must differ from allcaps logic :( Районний Відділ Юстиції = RVJ/RVJu != RVJU
 
         // .replace(/([\-?'=\/\\\|<>]*([0-9]?[a-zA-Z]+[\-?&'":\.=\/\\\|<>]*(\s[0-9]?[a-zA-Z])?){1,})(\s+)?/g, '{{$1}}$4') // with digits? Protection of basic 26 latin characters
         
         // .replace(/([\-?'=\/\\\|<>]*([a-zA-Z]+[\-?&'":\.=\/\\\|<>]*(\s[a-zA-Z])?){1,})(\s+)?/g, '`$1´$4') // Protection of basic 26 latin characters
-        .replace(/([\-–—?&'"«»:\.=\/\\\|<>\(\)\u0301]*([a-zA-ZÀ-ž]+[\-–—?&'"«»:\.=\/\\\|<>\(\)\u0301]*(\s[a-zA-ZÀ-ž])?){1,})(\s+)?/g, leftProtectionSymbol+'$1'+rightProtectionSymbol+'$4') // Protection of basic 26 latin characters
+        .replace(/([\-–—?&'"«»:=\/\\\|<>\u0301]*([a-zA-ZÀ-ž]+[\-–—?&'"«»:=\/\\\|<>\u0301]*(\s[a-zA-ZÀ-ž])?){1,})(\s+)?/g, leftProtectionSymbol+'$1'+rightProtectionSymbol+'$4') // Protection of basic 26 latin characters
 
-        // .replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g, '{{$1}}') // match URL
-
-//TODO match digits only inside a-z&/.etc
-
-// ([a-z].)(\d+)(.[a-z])
-
-// [\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))* // digits between
-// ([\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))*) // digits between in the capturing group
+        // [\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))* // digits between
+        // ([\?\:\=\-\,\.\(\\\/\|]*\d+([\?\:\=\-\,\.\(\\\/\|]*(\d+))*) // digits between in the capturing group
 
         // .replace(new RegExp(oldWord, 'g'), '"' // PATTERN with variables
 
@@ -542,9 +531,13 @@ function latToUkr(text) {
         .replace(/Š́U/g, 'ШЮ')
 
         // .replace(/(^|[\s-\('"«»:\\\/])NA(JA|JE|JI|JU)((BED)|(VN[YÝIO])|(VU)|(DK?[\sAYIOU])|(KIR)|(LO[ŽZ])|(RMAR)|(ME?Ć)|(MN[AYIOU])|(BSTV)|(B[\sAYIU])|(DA[NT])|(DEN)|(DŽ)|(ŽAČ)|(ŽDŽ)|(ŽEN)|(ŽYT)|(ŽUV)|(Z[DN])|(N[\sAYIOU])|(ST)|(TYV)|(HAT))/g, '$1НА$2$3')
-        .replace(/na(ja|je|ji|ju)((([mh]\s)|([jm])|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'на$1$2')
-        .replace(/Na(ja|je|ji|ju)((([mh]\s)|([jm])|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'На$1$2')
-        .replace(/NA(JA|JE|JI|JU)((([MH]\s)|([JM])|([\s]))|(BED)|(VN[AYÝIOU])|(VU)|(DK?[\sAYIOU])|(KIR)|(LO[ŽZ])|(RMAR)|(ME?Ć)|(MN[AYIOU])|(BSTV)|(B[\sAYIOU])|([VL])|(DA[NT])|(DEN)|(DŽ)|(ŽAČ)|(ŽDŽ)|(ŽEN)|(ŽYT)|(ŽUV)|(Z[DN])|(N[\sAYIOU])|(ST)|(TYV)|(HAT))/g, 'НА$1$2')
+        .replace(/(ščo|jak)naj/g, '$1най')
+        .replace(/(Ščo|Jak)naj/g, '$1най')
+        .replace(/(ŠČO|JAK)NAJ/g, '$1НАЙ')
+
+        .replace(/na(ja|je|ji|ju)((([mh]\s)|(ju|my)|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'на$1$2')
+        .replace(/Na(ja|je|ji|ju)((([mh]\s)|(ju|my)|([\s]))|(bed)|(vn[ayýiou])|(vu)|(dk?[\sayiou])|(kir)|(lo[žz])|(rmar)|(me?ć)|(mn[ayiou])|(bstv)|(b[\sayiou])|([vl])|(da[nt])|(den)|(dž)|(žač)|(ždž)|(žen)|(žyt)|(žuv)|(z[dn])|(n[\sayiou])|(st)|(tyv)|(hat))/g, 'На$1$2')
+        .replace(/NA(JA|JE|JI|JU)((([MH]\s)|(JU|MY)|([\s]))|(BED)|(VN[AYÝIOU])|(VU)|(DK?[\sAYIOU])|(KIR)|(LO[ŽZ])|(RMAR)|(ME?Ć)|(MN[AYIOU])|(BSTV)|(B[\sAYIOU])|([VL])|(DA[NT])|(DEN)|(DŽ)|(ŽAČ)|(ŽDŽ)|(ŽEN)|(ŽYT)|(ŽUV)|(Z[DN])|(N[\sAYIOU])|(ST)|(TYV)|(HAT))/g, 'НА$1$2')
 
         .replace(/(^|[\s-\('"«»:\\\/])naj([aeiu])/g, '$1най$2')
         .replace(/(^|[\s-\('"«»:\\\/])Naj([aeiu])/g, '$1Най$2')
@@ -560,35 +553,43 @@ function latToUkr(text) {
         .replace(/ďa/g, 'дя')
         .replace(/ďe/g, 'дє')
         .replace(/ďu/g, 'дю')
-        .replace(/ď/g, 'дь')
+        // .replace(/ď/g, 'дь')
+        .replace(new RegExp('ď' + brackets, 'g'), 'дь')
         .replace(/źa/g, 'зя')
         .replace(/źe/g, 'зє')
         .replace(/źu/g, 'зю')
-        .replace(/ź/g, 'зь')
+        // .replace(/ź/g, 'зь')
+        .replace(new RegExp('ź' + brackets, 'g'), 'зь')
         .replace(/ľa/g, 'ля')
         .replace(/ľe/g, 'лє')
         .replace(/ľu/g, 'лю')
-        .replace(/ľ/g, 'ль')
+        // .replace(/ľ/g, 'ль')
+        .replace(new RegExp('ľ' + brackets, 'g'), 'ль')
         .replace(/ńa/g, 'ня')
         .replace(/ńe/g, 'нє')
         .replace(/ńu/g, 'ню')
-        .replace(/ń/g, 'нь')
+        // .replace(/ń/g, 'нь')
+        .replace(new RegExp('ń' + brackets, 'g'), 'нь')
         .replace(/ŕa/g, 'ря')
         .replace(/ŕe/g, 'рє')
         .replace(/ŕu/g, 'рю')
-        .replace(/ŕ/g, 'рь')
+        // .replace(/ŕ/g, 'рь')
+        .replace(new RegExp('ŕ' + brackets, 'g'), 'рь')
         .replace(/śa/g, 'ся')
         .replace(/śe/g, 'сє')
         .replace(/śu/g, 'сю')
-        .replace(/ś/g, 'сь')
+        // .replace(/ś/g, 'сь')
+        .replace(new RegExp('ś' + brackets, 'g'), 'сь')
         .replace(/ťa/g, 'тя')
         .replace(/ťe/g, 'тє')
         .replace(/ťu/g, 'тю')
-        .replace(/ť/g, 'ть')
+        // .replace(/ť/g, 'ть')
+        .replace(new RegExp('ť' + brackets, 'g'), 'ть')
         .replace(/ća/g, 'ця')
         .replace(/će/g, 'цє')
         .replace(/ću/g, 'цю')
-        .replace(/ć/g, 'ць')
+        // .replace(/ć/g, 'ць')
+        .replace(new RegExp('ć' + brackets, 'g'), 'ць')
 
         .replace(/Ďa/g, 'Дя')
         .replace(/Ďe/g, 'Дє')
@@ -817,8 +818,10 @@ function latToUkr(text) {
         // .replace(/`/g, '') //new protection symbol
         // .replace(/´/g, '') //new protection symbol
         .replace(new RegExp(leftProtectionSymbol, 'g'), '') //new protection symbol
-        .replace(new RegExp(rightProtectionSymbol, 'g'), '') //new protection symbol
-        .replace(/([^аеоу])\u0301/g, '$1'); //U+0301 combining acute
+        .replace(new RegExp(rightProtectionSymbol, 'g'), ''); //new protection symbol
+
+        // .replace(/([^аеоу])\u0301/g, '$1'); //U+0301 combining acute 
+
         // .replace(/'/g, '')
         // .replace(/’/g, '');
 }
