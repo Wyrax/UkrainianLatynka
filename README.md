@@ -1,7 +1,7 @@
 # Ukrainian Latin Alphabet
 Ukrainian cyrillic to latin transliterator
 
-# Ukrajinśka latynyća
+# Ukrajinśka latynyća (variant)
 
 | Абетка | [Звук] | [Звук IPA] | Latynyća |
 | :---:  | :---:  | :---:      | :---:    |
@@ -21,6 +21,7 @@ Ukrainian cyrillic to latin transliterator
 |        | [ий]   | [ɪj]       | Ýý       |
 | Іі     | [і]    | [i]        | Ii       |
 | Її     | [йі]   | [ji]       |          |
+| Йй     | [й]    | [j]        | Jj       |
 | Кк     | [к]    | [k]        | Kk       |
 | Лл     | [л]    | [l]        | Ll       |
 |        | [л']   | [ʎ]        | Ľľ       |
@@ -48,5 +49,5 @@ Ukrainian cyrillic to latin transliterator
 | Яя     | [йа]   | [ja]       |          |
 |        | [дж]   | [d͡ʒ]       | Đđ       |
 |        | [дз]   | [d͡z]       | Ƶƶ       |
-|        | [дз']  | [d͡zʲ]      |          |
+|        | [дз']  | [d͡zʲ]      | Ƶ́ƶ́       |
 
